@@ -149,7 +149,7 @@ body{
 
 const scores = {
 BEDP:0,
-PHON:0,
+JOKE:0,
 PZZA:0,
 DRAM:0,
 LAZY:0,
@@ -249,15 +249,17 @@ match:"96%",
 text:"你已經和床建立永久同盟。",
 strength:"假日可以消失在棉被裡兩天。",
 weak:"起床像打最終Boss。"
+fact:"你的床認識你比朋友還久。"
 },
 
-PHON:{
+JOKE:{
 emoji:"🤡",
 title:"JOKE 暈船小狗",
-match:"94%",
-text:"眼睛一睜 騷擾crush。",
-strength:"張口閉口都是他。",
-weak:"他不回你訊息就發瘋。"
+match:"100%",
+text:"恭喜，你的人生目前由一個可能根本不知道你存在的人控制。",
+strength:"訊息秒回速度超越光速。",
+weak:"對方 3 小時沒回就開始思考人生。",
+fact:"根據不可靠統計，你一天有 73% 的時間在想他。"
 },
 
 PZZA:{
@@ -267,6 +269,7 @@ match:"91%",
 text:"你的情緒由食物供電。",
 strength:"永遠知道哪裡有好吃的。",
 weak:"肚子餓時戰力歸零。"
+fact:"你的人生規劃有一半跟下一餐有關。"
 },
 
 DRAM:{
@@ -275,7 +278,8 @@ title:"DRAM 八點檔主角",
 match:"95%",
 text:"你的腦內小劇場全年無休。",
 strength:"想像力超強。",
-weak:"容易自己嚇自己。"
+weak:"容易自己嚇自己。",
+fact:"幻想少一點會幫你省一半的力氣。"
 },
 
 LAZY:{
@@ -284,7 +288,8 @@ title:"LAZY 節能模式",
 match:"93%",
 text:"你是懶惰界的藝術家。",
 strength:"超會保存體力。",
-weak:"移動需要很大決心。"
+weak:"移動需要很大決心。",
+fact:"看似最沒力,其實力氣根本沒花掉。"
 },
 
 DEAD:{
@@ -293,7 +298,8 @@ title:"DEAD 奇蹟信仰者",
 match:"99%",
 text:"你相信宇宙會幫你完成一切。",
 strength:"心態穩如老狗。",
-weak:"截止日前才開始。"
+weak:"截止日前才開始。",
+fact:"遲早有一天會壓線失敗。"
 }
 
 };
@@ -378,6 +384,15 @@ document.getElementById("app").innerHTML=`
 <h3>⚠️ 注意事項</h3>
 <p>${r.weak}</p>
 </div>
+
+<div class="card">
+<h3>📊 不可靠統計</h3>
+<p>${r.fact}</p>
+</div>
+
+<button class="restart" onclick="location.reload()">
+再測一次
+</button>
 
 <button class="restart" onclick="location.reload()">
 再測一次
