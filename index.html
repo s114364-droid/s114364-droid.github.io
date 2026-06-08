@@ -1,17 +1,9 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset = "utf-8">
-    <title>hehe</title>
-    <link rel="icon" href="icon.png">
-  </head>
-  <body>
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>朋友眼中的你是哪種類型的人？</title>
+<title>🤡 你的真實廢物 MBTI 是什麼？</title>
 
 <style>
 *{
@@ -22,7 +14,7 @@
 
 body{
     font-family:"Microsoft JhengHei",sans-serif;
-    background:linear-gradient(135deg,#667eea,#764ba2);
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -31,173 +23,218 @@ body{
 }
 
 .container{
-    background:white;
     width:100%;
-    max-width:700px;
-    border-radius:20px;
+    max-width:750px;
+    background:white;
+    border-radius:25px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
 }
 
-h1{
+.title{
     text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
     margin-bottom:25px;
-    color:#333;
 }
 
 .progress{
-    margin-bottom:20px;
-    color:#666;
     text-align:center;
+    margin-bottom:20px;
+    color:#888;
 }
 
 .question{
-    font-size:24px;
+    font-size:26px;
     font-weight:bold;
     margin-bottom:20px;
-    color:#222;
 }
 
 .option{
-    display:block;
     width:100%;
-    padding:15px;
-    margin:10px 0;
+    padding:16px;
     border:none;
-    border-radius:12px;
-    background:#f3f4f6;
+    margin:10px 0;
+    border-radius:15px;
+    background:#f5f5f5;
     cursor:pointer;
+    transition:.25s;
     font-size:16px;
-    transition:0.2s;
 }
 
 .option:hover{
-    background:#667eea;
+    transform:translateY(-2px);
+    background:#6c63ff;
     color:white;
 }
 
 .result{
     text-align:center;
+    animation:fade .5s;
 }
 
-.result h2{
+.emoji{
+    font-size:100px;
+}
+
+.result-title{
     font-size:40px;
-    margin-bottom:10px;
+    margin-top:10px;
 }
 
-.result p{
-    font-size:18px;
-    line-height:1.8;
+.match{
+    margin:20px 0;
+    background:linear-gradient(135deg,#6c63ff,#8b7dff);
+    color:white;
+    padding:20px;
+    border-radius:20px;
+}
+
+.percent{
+    font-size:48px;
+    font-weight:bold;
+}
+
+.card{
+    text-align:left;
+    background:#f8f9ff;
+    margin-top:15px;
+    padding:18px;
+    border-radius:15px;
+}
+
+.card h3{
+    margin-bottom:8px;
 }
 
 .restart{
     margin-top:25px;
-    padding:12px 25px;
+    padding:15px 30px;
     border:none;
-    border-radius:10px;
-    background:#667eea;
+    border-radius:15px;
+    background:#6c63ff;
     color:white;
+    font-size:18px;
     cursor:pointer;
-    font-size:16px;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>✨ 朋友眼中的你是哪種類型的人？</h1>
 
-    <div id="quiz"></div>
+<h1 class="title">🤡 你的真實廢物 MBTI 是什麼？</h1>
+<p class="subtitle">⚠️ 本測驗毫無科學根據，但可能過於真實</p>
+
+<div id="app"></div>
+
 </div>
 
 <script>
 
 const scores = {
-    leader:0,
-    creative:0,
-    social:0,
-    analyst:0
+BEDP:0,
+PHON:0,
+PZZA:0,
+DRAM:0,
+LAZY:0,
+DEAD:0
 };
 
 const questions = [
 
 {
-q:"假日你最想做什麼？",
-answers:[
-["規劃未來目標","leader"],
-["創作或畫畫","creative"],
-["跟朋友聚會","social"],
-["看紀錄片學知識","analyst"]
+q:"鬧鐘響了，你的第一反應是？",
+a:[
+["再睡5分鐘（其實1小時）","BEDP"],
+["拿起手機看通知","PHON"],
+["思考請假的可能性","DEAD"],
+["開始腦補今天會發生什麼","DRAM"]
 ]
 },
 
 {
-q:"班上要做報告時你通常會？",
-answers:[
-["負責帶領大家","leader"],
-["負責設計簡報","creative"],
-["協調大家合作","social"],
-["蒐集資料研究","analyst"]
+q:"放假時最常做什麼？",
+a:[
+["睡覺","BEDP"],
+["滑手機","PHON"],
+["吃東西","PZZA"],
+["發呆","LAZY"]
 ]
 },
 
 {
-q:"朋友最常稱讚你什麼？",
-answers:[
-["有主見","leader"],
-["有創意","creative"],
-["好相處","social"],
-["很聰明","analyst"]
+q:"考試剩一天時？",
+a:[
+["相信奇蹟","DEAD"],
+["查一天考上有可能嗎","PHON"],
+["幻想考第一","DRAM"],
+["先吃個東西","PZZA"]
 ]
 },
 
 {
-q:"遇到問題時你會？",
-answers:[
-["立刻決定方向","leader"],
-["想不同解法","creative"],
-["找人討論","social"],
-["分析原因","analyst"]
+q:"手機剩3%電量時？",
+a:[
+["超級緊張","PHON"],
+["隨緣","DEAD"],
+["先躺一下","BEDP"],
+["幫手機想遺言","DRAM"]
 ]
 },
 
 {
-q:"你最喜歡哪種活動？",
-answers:[
-["競賽挑戰","leader"],
-["藝術創作","creative"],
-["社團活動","social"],
-["解謎遊戲","analyst"]
+q:"朋友找你出門？",
+a:[
+["太遠了","LAZY"],
+["床不讓我走","BEDP"],
+["有東西吃嗎","PZZA"],
+["先滑短影片","PHON"]
 ]
 },
 
 {
-q:"你最討厭什麼？",
-answers:[
-["沒效率","leader"],
-["無聊","creative"],
-["孤單","social"],
-["不合理","analyst"]
+q:"半夜兩點還沒睡？",
+a:[
+["滑手機","PHON"],
+["追劇","BEDP"],
+["吃宵夜","PZZA"],
+["回想尷尬往事","DRAM"]
 ]
 },
 
 {
-q:"如果有超能力你想要？",
-answers:[
-["號令全場","leader"],
-["創造任何東西","creative"],
-["瞬間交朋友","social"],
-["超級智慧","analyst"]
+q:"老師說要分組時？",
+a:[
+["希望有人幫做","LAZY"],
+["查誰最會做","PHON"],
+["幻想自己是主角","DRAM"],
+["先約吃飯","PZZA"]
 ]
 },
 
 {
-q:"你希望別人怎麼記住你？",
-answers:[
-["可靠的人","leader"],
-["有特色的人","creative"],
-["溫暖的人","social"],
-["有深度的人","analyst"]
+q:"你的人生座右銘？",
+a:[
+["明天再說","DEAD"],
+["能躺就不坐","BEDP"],
+["有網路就能活","PHON"],
+["吃飽再煩惱","PZZA"]
 ]
 }
 
@@ -205,77 +242,103 @@ answers:[
 
 const results = {
 
-leader:{
-emoji:"🌟",
-title:"領導者型",
-text:"你有決策能力和責任感，遇到事情時常主動站出來帶領大家。"
+BEDP:{
+emoji:"🛌",
+title:"BEDP 床鋪共生體",
+match:"96%",
+text:"你已經和床建立永久同盟。",
+strength:"假日可以消失在棉被裡兩天。",
+weak:"起床像打最終Boss。"
 },
 
-creative:{
-emoji:"🎨",
-title:"創意家型",
-text:"你充滿想像力與創造力，總能想到與眾不同的新點子。"
+PHON:{
+emoji:"📱",
+title:"PHON 手機融合人",
+match:"94%",
+text:"你和手機已經難分難捨。",
+strength:"任何梗圖都能第一時間看到。",
+weak:"沒有手機會懷疑人生。"
 },
 
-social:{
-emoji:"🤝",
-title:"社交王型",
-text:"你善於與人相處，朋友很多，總是能活絡氣氛。"
+PZZA:{
+emoji:"🍕",
+title:"PZZA 披薩守護者",
+match:"91%",
+text:"你的情緒由食物供電。",
+strength:"永遠知道哪裡有好吃的。",
+weak:"肚子餓時戰力歸零。"
 },
 
-analyst:{
-emoji:"🔍",
-title:"分析師型",
-text:"你喜歡思考與研究，做事有條理且注重細節。"
+DRAM:{
+emoji:"🎭",
+title:"DRAM 八點檔主角",
+match:"95%",
+text:"你的腦內小劇場全年無休。",
+strength:"想像力超強。",
+weak:"容易自己嚇自己。"
+},
+
+LAZY:{
+emoji:"🐼",
+title:"LAZY 節能模式",
+match:"93%",
+text:"你是懶惰界的藝術家。",
+strength:"超會保存體力。",
+weak:"移動需要很大決心。"
+},
+
+DEAD:{
+emoji:"💀",
+title:"DEAD 奇蹟信仰者",
+match:"99%",
+text:"你相信宇宙會幫你完成一切。",
+strength:"心態穩如老狗。",
+weak:"截止日前才開始。"
 }
 
 };
 
 let current = 0;
 
-function showQuestion(){
-
-const quiz = document.getElementById("quiz");
+function renderQuestion(){
 
 const q = questions[current];
 
-quiz.innerHTML = `
+document.getElementById("app").innerHTML = `
 <div class="progress">
 第 ${current+1} / ${questions.length} 題
 </div>
 
-<div class="question">
-${q.q}
-</div>
+<div class="question">${q.q}</div>
 
 <div id="options"></div>
 `;
 
-const options = document.getElementById("options");
+const box = document.getElementById("options");
 
-q.answers.forEach(answer=>{
+q.a.forEach(item=>{
 
 const btn = document.createElement("button");
 
 btn.className="option";
 
-btn.textContent=answer[0];
+btn.innerText=item[0];
 
 btn.onclick=()=>{
 
-scores[answer[1]]++;
+scores[item[1]]++;
 
 current++;
 
-if(current < questions.length){
-showQuestion();
+if(current<questions.length){
+renderQuestion();
 }else{
 showResult();
 }
 
 };
 
-options.appendChild(btn);
+box.appendChild(btn);
 
 });
 
@@ -283,39 +346,50 @@ options.appendChild(btn);
 
 function showResult(){
 
-let winner = Object.keys(scores).reduce((a,b)=>
-scores[a] > scores[b] ? a : b
-);
+let winner = Object.keys(scores)
+.reduce((a,b)=>scores[a]>scores[b]?a:b);
 
 const r = results[winner];
 
-document.getElementById("quiz").innerHTML = `
+document.getElementById("app").innerHTML=`
+
 <div class="result">
 
-<h2>${r.emoji}</h2>
+<div class="emoji">${r.emoji}</div>
 
-<h3>${r.title}</h3>
+<h2 class="result-title">${r.title}</h2>
 
-<br>
+<div class="match">
+匹配度
+<div class="percent">${r.match}</div>
+</div>
 
+<div class="card">
+<h3>📖 人格解析</h3>
 <p>${r.text}</p>
+</div>
 
-<button class="restart"
-onclick="location.reload()">
+<div class="card">
+<h3>✨ 特徵</h3>
+<p>${r.strength}</p>
+</div>
+
+<div class="card">
+<h3>⚠️ 注意事項</h3>
+<p>${r.weak}</p>
+</div>
+
+<button class="restart" onclick="location.reload()">
 再測一次
 </button>
 
 </div>
 `;
-
 }
 
-showQuestion();
+renderQuestion();
 
 </script>
 
 </body>
 </html>
-  </body>
-</html>
-
