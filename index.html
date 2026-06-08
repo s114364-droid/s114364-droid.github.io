@@ -6,7 +6,316 @@
     <link rel="icon" href="icon.png">
   </head>
   <body>
-      hello world(●'◡'●)
+   <!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朋友眼中的你是哪種類型的人？</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Microsoft JhengHei",sans-serif;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    width:100%;
+    max-width:700px;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#666;
+    text-align:center;
+}
+
+.question{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:20px;
+    color:#222;
+}
+
+.option{
+    display:block;
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:12px;
+    background:#f3f4f6;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+}
+
+.option:hover{
+    background:#667eea;
+    color:white;
+}
+
+.result{
+    text-align:center;
+}
+
+.result h2{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.result p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.restart{
+    margin-top:25px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#667eea;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✨ 朋友眼中的你是哪種類型的人？</h1>
+
+    <div id="quiz"></div>
+</div>
+
+<script>
+
+const scores = {
+    leader:0,
+    creative:0,
+    social:0,
+    analyst:0
+};
+
+const questions = [
+
+{
+q:"假日你最想做什麼？",
+answers:[
+["規劃未來目標","leader"],
+["創作或畫畫","creative"],
+["跟朋友聚會","social"],
+["看紀錄片學知識","analyst"]
+]
+},
+
+{
+q:"班上要做報告時你通常會？",
+answers:[
+["負責帶領大家","leader"],
+["負責設計簡報","creative"],
+["協調大家合作","social"],
+["蒐集資料研究","analyst"]
+]
+},
+
+{
+q:"朋友最常稱讚你什麼？",
+answers:[
+["有主見","leader"],
+["有創意","creative"],
+["好相處","social"],
+["很聰明","analyst"]
+]
+},
+
+{
+q:"遇到問題時你會？",
+answers:[
+["立刻決定方向","leader"],
+["想不同解法","creative"],
+["找人討論","social"],
+["分析原因","analyst"]
+]
+},
+
+{
+q:"你最喜歡哪種活動？",
+answers:[
+["競賽挑戰","leader"],
+["藝術創作","creative"],
+["社團活動","social"],
+["解謎遊戲","analyst"]
+]
+},
+
+{
+q:"你最討厭什麼？",
+answers:[
+["沒效率","leader"],
+["無聊","creative"],
+["孤單","social"],
+["不合理","analyst"]
+]
+},
+
+{
+q:"如果有超能力你想要？",
+answers:[
+["號令全場","leader"],
+["創造任何東西","creative"],
+["瞬間交朋友","social"],
+["超級智慧","analyst"]
+]
+},
+
+{
+q:"你希望別人怎麼記住你？",
+answers:[
+["可靠的人","leader"],
+["有特色的人","creative"],
+["溫暖的人","social"],
+["有深度的人","analyst"]
+]
+}
+
+];
+
+const results = {
+
+leader:{
+emoji:"🌟",
+title:"領導者型",
+text:"你有決策能力和責任感，遇到事情時常主動站出來帶領大家。"
+},
+
+creative:{
+emoji:"🎨",
+title:"創意家型",
+text:"你充滿想像力與創造力，總能想到與眾不同的新點子。"
+},
+
+social:{
+emoji:"🤝",
+title:"社交王型",
+text:"你善於與人相處，朋友很多，總是能活絡氣氛。"
+},
+
+analyst:{
+emoji:"🔍",
+title:"分析師型",
+text:"你喜歡思考與研究，做事有條理且注重細節。"
+}
+
+};
+
+let current = 0;
+
+function showQuestion(){
+
+const quiz = document.getElementById("quiz");
+
+const q = questions[current];
+
+quiz.innerHTML = `
+<div class="progress">
+第 ${current+1} / ${questions.length} 題
+</div>
+
+<div class="question">
+${q.q}
+</div>
+
+<div id="options"></div>
+`;
+
+const options = document.getElementById("options");
+
+q.answers.forEach(answer=>{
+
+const btn = document.createElement("button");
+
+btn.className="option";
+
+btn.textContent=answer[0];
+
+btn.onclick=()=>{
+
+scores[answer[1]]++;
+
+current++;
+
+if(current < questions.length){
+showQuestion();
+}else{
+showResult();
+}
+
+};
+
+options.appendChild(btn);
+
+});
+
+}
+
+function showResult(){
+
+let winner = Object.keys(scores).reduce((a,b)=>
+scores[a] > scores[b] ? a : b
+);
+
+const r = results[winner];
+
+document.getElementById("quiz").innerHTML = `
+<div class="result">
+
+<h2>${r.emoji}</h2>
+
+<h3>${r.title}</h3>
+
+<br>
+
+<p>${r.text}</p>
+
+<button class="restart"
+onclick="location.reload()">
+再測一次
+</button>
+
+</div>
+`;
+
+}
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
   </body>
 </html>
 
